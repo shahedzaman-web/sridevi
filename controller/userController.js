@@ -35,7 +35,10 @@ async function registerUser(req, res) {
     console.log(user);
     await user.save();
     const token = jwt.sign(
-      { user_id: user._id, user_name },
+      { user_id: user._id, 
+        mobile_number: user.mobile_number,
+        user_name: user.user_name,
+        full_name: user.full_name},
       process.env.TOKEN_KEY,
       {
         expiresIn: "2h",
