@@ -22,7 +22,7 @@ async function registerUser(req, res) {
     const oldUser = await User.findOne({ user_name });
 
     if (oldUser) {
-      return res.status(409).json({message: "User Already Exist. Please Login})
+      return res.status(409).json({message: "User Already Exist. Please Login"})
     }
     const user = new User(req.body)
     //Encrypt user password
