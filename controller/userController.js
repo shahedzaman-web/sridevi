@@ -14,7 +14,7 @@ async function registerUser(req, res) {
 
     // Validate user input
     if (!(user_name && password && full_name && mobile_number)) {
-         res.status(400).send("All input is required");
+         res.status(400).json({message: "All input is required"});
     }
 
     // check if user already exist
@@ -22,7 +22,7 @@ async function registerUser(req, res) {
     const oldUser = await User.findOne({ user_name });
 
     if (oldUser) {
-      return res.status(409).send("User Already Exist. Please Login");
+      return res.status(409).json({message: "User Already Exist. Please Login})
     }
     const user = new User(req.body)
     //Encrypt user password
@@ -60,7 +60,7 @@ async function loginUser(req, res) {
 
     // Validate user input
     if (!(mobile_number && password)) {
-      res.status(400).send("All input is required");
+      res.status(400).json({message: "All input is required"});
     }
     // Validate if user exist in our database
     const user = await User.findOne({ mobile_number });
@@ -84,7 +84,7 @@ async function loginUser(req, res) {
     }
     
   } catch (err) {
-    res.status(400).send("Invalid Credentials");
+    res.status(400).json({message: "Invalid Credentials"});
     console.log(err);
   }
 }
