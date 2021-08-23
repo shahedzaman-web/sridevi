@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
 // Replace this with your MONGOURI.
-const MONGOURI = "mongodb+srv://admin:9i-projects95SR248FOR99@sridevi.jlbyn.mongodb.net/sridevi?retryWrites=true&w=majority";
+
 
 const InitiateMongoServer = async () => {
   mongoose
-  .connect(MONGOURI, {
+  .connect(process.env.MONGOURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
