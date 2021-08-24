@@ -68,6 +68,9 @@ async function loginUser(req, res) {
     // Validate if user exist in our database
     const user = await User.findOne({ mobile_number });
 
+    if (!user) {
+         res.status(404).json({message: "Invalid mobile number or password!"});
+    }
     console.log(user);
     if (user && (await bcrypt.compare(password, user.password))) {
       // Create token
